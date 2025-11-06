@@ -12,14 +12,14 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-hurry = "0.1"
+hurry = "0.1.3"
 ```
 
 To use the procedural macro for generating custom shorthand macros, enable the `macros` feature:
 
 ```toml
 [dependencies]
-hurry = { version = "0.1", features = ["macros"] }
+hurry = { version = "0.1.3", features = ["macros"] }
 ```
 
 ## Usage
