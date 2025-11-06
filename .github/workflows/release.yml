@@ -1,58 +1,35 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-      - run: cargo test
-
   release:
-    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: dtolnay/rust-toolchain@stable
-      - name: Bump version
+      - run: cargo test
+      - name: Update version
         run: |
-          VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
-          IFS='.' read -r major minor patch <<< "$VERSION"
-          new_patch=$((patch + 1))
-          NEW_VERSION="$major.$minor.$new_patch"
-          sed -i "s/version = \"$VERSION\"/version = \"$NEW_VERSION\"/" Cargo.toml
-          sed -i "s/version = \"$VERSION\"/version = \"$NEW_VERSION\"/" hurry-macros/Cargo.toml
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
-      - name: Commit version bump
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add Cargo.toml hurry-macros/Cargo.toml
-          git commit -m "chore: bump version to $NEW_VERSION"
-          git push
-      - name: Create tag
-        run: |
-          git tag "v$NEW_VERSION"
-          git push origin "v$NEW_VERSION"
+          TAG=${{ github.event.release.tag_name }}
+          VERSION=${TAG#v}  # Remove 'v' prefix if present
+          CURRENT_VERSION=$(grep '^version = ' Cargo.toml | head -1 | sed 's/version = "\(.*\)"/\1/')
+          if [ "$CURRENT_VERSION" != "$VERSION" ]; then
+            sed -i "s/version = \"$CURRENT_VERSION\"/version = \"$VERSION\"/" Cargo.toml
+            sed -i "s/version = \"$CURRENT_VERSION\"/version = \"$VERSION\"/" hurry-macros/Cargo.toml
+            git config --local user.email "action@github.com"
+            git config --local user.name "GitHub Action"
+            git add Cargo.toml hurry-macros/Cargo.toml
+            git commit -m "chore: update version to $VERSION"
+            git push
+          fi
       - name: Publish hurry-macros
         run: |
           cd hurry-macros
           cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
       - name: Publish hurry
         run: cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
-      - name: Create release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ env.NEW_VERSION }}
-          name: Release ${{ env.NEW_VERSION }}
-          body: |
-            Automatic release ${{ env.NEW_VERSION }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
