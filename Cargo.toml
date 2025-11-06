@@ -2,10 +2,10 @@
 name = "hurry"
 version = "0.1.0"
 edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Peter Antoncich <antoncichp@gmail.com>"]
 description = "Convenient macros for creating pointer types (Box, Rc, Arc, etc.)"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/yourusername/hurry"
+repository = "https://github.com/sweetpeteza/hurry"
 keywords = ["macro", "pointer", "box", "rc", "arc"]
 categories = ["rust-patterns", "no-std"]
 readme = "README.md"

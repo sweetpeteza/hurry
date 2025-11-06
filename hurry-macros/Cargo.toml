@@ -2,7 +2,7 @@
 name = "hurry-macros"
 version = "0.1.0"
 edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Peter Antoncich <antoncichp@gmail.com>"]
 description = "Procedural macros for the hurry crate"
 license = "MIT OR Apache-2.0"
 
