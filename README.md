@@ -32,7 +32,7 @@ The `hurry` crate provides convenient macros for creating common pointer types:
 use hurry::*;
 
 // Create a Box
-let boxed = box!(42);
+let boxed = boxx!(42);
 assert_eq!(*boxed, 42);
 
 // Create an Rc
