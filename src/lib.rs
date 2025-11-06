@@ -1,5 +1,5 @@
 /// Macro for creating a `Box<T>` from a value
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::boxx;
@@ -76,7 +76,7 @@ macro_rules! arc_mutex {
 }
 
 /// Macro for creating an `Arc<RwLock<T>>` from a value
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::arc_rwlock;
@@ -92,7 +92,7 @@ macro_rules! arc_rwlock {
 }
 
 /// Macro for creating a `Mutex<T>` from a value
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::mutex;
@@ -108,7 +108,7 @@ macro_rules! mutex {
 }
 
 /// Macro for creating a `RwLock<T>` from a value
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::rwlock;
@@ -124,7 +124,7 @@ macro_rules! rwlock {
 }
 
 /// Macro for creating a `Cell<T>` from a value
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::cell;
@@ -140,7 +140,7 @@ macro_rules! cell {
 }
 
 /// Macro for creating a `RefCell<T>` from a value
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::refcell;
@@ -171,7 +171,7 @@ macro_rules! pin_box {
 }
 
 /// Macro for creating a `Vec<Box<T>>` from multiple values
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::vec_box;
@@ -188,7 +188,7 @@ macro_rules! vec_box {
 }
 
 /// Macro for creating a `Vec<Rc<T>>` from multiple values
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::vec_rc;
@@ -205,7 +205,7 @@ macro_rules! vec_rc {
 }
 
 /// Macro for creating a `Vec<Arc<T>>` from multiple values
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::vec_arc;
@@ -237,7 +237,7 @@ macro_rules! cow_owned {
 }
 
 /// Macro for creating a borrowed `Cow<T>` from a reference
-/// 
+///
 /// # Example
 /// ```
 /// use hurry::cow_borrowed;

@@ -2,14 +2,19 @@
 name = "hurry"
 version = "0.1.0"
 edition = "2021"
-authors = ["Peter Antoncich antoncichp@gmail.com"]
+authors = ["Your Name <your.email@example.com>"]
 description = "Convenient macros for creating pointer types (Box, Rc, Arc, etc.)"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/sweetpeteza/hurry"
+repository = "https://github.com/yourusername/hurry"
 keywords = ["macro", "pointer", "box", "rc", "arc"]
 categories = ["rust-patterns", "no-std"]
 readme = "README.md"
 
 [dependencies]
+hurry-macros = { version = "0.1.0", path = "./hurry-macros", optional = true }
 
 [dev-dependencies]
+
+[features]
+default = ["macros"]
+macros = ["hurry-macros"]

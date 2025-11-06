@@ -12,13 +12,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hurry"
-version = "0.1.0"
-dependencies = [
- "hurry-macros",
-]
-
-[[package]]
 name = "hurry-macros"
 version = "0.1.0"
 dependencies = [
