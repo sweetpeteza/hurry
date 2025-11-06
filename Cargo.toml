@@ -1,6 +1,6 @@
 [package]
 name = "hurry"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 authors = ["Peter Antoncich <antoncichp@gmail.com>"]
 description = "Convenient macros for creating pointer types (Box, Rc, Arc, etc.)"
@@ -11,7 +11,7 @@ categories = ["rust-patterns", "no-std"]
 readme = "README.md"
 
 [dependencies]
-hurry-macros = { version = "0.1.2", path = "./hurry-macros", optional = true }
+hurry-macros = { version = "0.1.3", path = "./hurry-macros", optional = true }
 
 [dev-dependencies]
 
