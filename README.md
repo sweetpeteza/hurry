@@ -15,6 +15,13 @@ Add this to your `Cargo.toml`:
 hurry = "0.1"
 ```
 
+To use the procedural macro for generating custom shorthand macros, enable the `macros` feature:
+
+```toml
+[dependencies]
+hurry = { version = "0.1", features = ["macros"] }
+```
+
 ## Usage
 
 The `hurry` crate provides convenient macros for creating common pointer types:
@@ -60,7 +67,34 @@ let rwlock = arc_rwlock!(0);
 assert_eq!(*x.read().unwrap(), 30);
 ```
 
+### Procedural Macros
+
+The `hurry` crate also provides a procedural macro for generating shorthand macros for your own types:
+
+```rust
+use hurry_macros::shorthand;
+
+struct MyType {
+    value: i32,
+}
+
+#[shorthand]
+impl MyType {
+    pub fn new(value: i32) -> Self {
+        MyType { value }
+    }
+}
+
+// This generates a `my_type!` macro for creating instances
+let instance = my_type!(42);
+assert_eq!(instance.value, 42);
+```
+
+The `#[shorthand]` attribute generates a macro named after the type in snake_case that calls the `new` method.
+
 ## Available Macros
+
+### Declarative Macros
 
 - `boxx!(value)` → `Box::new(value)`
 - `rc!(value)` → `Rc::new(value)`
@@ -68,6 +102,20 @@ assert_eq!(*x.read().unwrap(), 30);
 - `rc_refcell!(value)` → `Rc<RefCell<T>>::new(RefCell::new(value))`
 - `arc_mutex!(value)` → `Arc<Mutex<T>>::new(Mutex::new(value))`
 - `arc_rwlock!(value)` → `Arc<RwLock<T>>::new(RwLock::new(value))`
+- `mutex!(value)` → `Mutex::new(value)`
+- `rwlock!(value)` → `RwLock::new(value)`
+- `cell!(value)` → `Cell::new(value)`
+- `refcell!(value)` → `RefCell::new(value)`
+- `pin_box!(value)` → `Box::pin(value)`
+- `vec_box!(values...)` → `vec![Box::new(value), ...]`
+- `vec_rc!(values...)` → `vec![Rc::new(value), ...]`
+- `vec_arc!(values...)` → `vec![Arc::new(value), ...]`
+- `cow_owned!(value)` → `Cow::Owned(value)`
+- `cow_borrowed!(value)` → `Cow::Borrowed(value)`
+
+### Procedural Macros
+
+- `#[shorthand]` → Generates a shorthand macro for types with a `new` method
 
 ## Documentation
 

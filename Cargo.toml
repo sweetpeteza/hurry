@@ -16,5 +16,4 @@ hurry-macros = { version = "0.1.0", path = "./hurry-macros", optional = true }
 [dev-dependencies]
 
 [features]
-default = ["macros"]
 macros = ["hurry-macros"]
