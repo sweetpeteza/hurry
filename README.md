@@ -58,13 +58,13 @@ assert_eq!(*cell.borrow(), 10);
 
 // Arc<Mutex<T>> for thread-safe interior mutability
 let mutex = arc_mutex!(0);
-*x.lock().unwrap() += 20;
-assert_eq!(*x.lock().unwrap(), 20);
+*mutex.lock().unwrap() += 20;
+assert_eq!(*mutex.lock().unwrap(), 20);
 
 // Arc<RwLock<T>> for thread-safe read-write access
 let rwlock = arc_rwlock!(0);
-*x.write().unwrap() += 30;
-assert_eq!(*x.read().unwrap(), 30);
+*rwlock.write().unwrap() += 30;
+assert_eq!(*rwlock.read().unwrap(), 30);
 ```
 
 ### Procedural Macros
