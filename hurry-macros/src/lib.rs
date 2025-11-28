@@ -28,19 +28,17 @@ use syn::{parse_macro_input, ItemImpl};
 #[proc_macro_attribute]
 pub fn shorthand(_attr: TokenStream, item: TokenStream) -> TokenStream {
     let input = parse_macro_input!(item as ItemImpl);
-    
+
     // Get the type name from the impl block
     let type_name = match &*input.self_ty {
-        syn::Type::Path(type_path) => {
-            type_path.path.segments.last().map(|seg| &seg.ident)
-        }
+        syn::Type::Path(type_path) => type_path.path.segments.last().map(|seg| &seg.ident),
         _ => None,
     };
 
     let Some(type_ident) = type_name else {
         return syn::Error::new_spanned(
             &input.self_ty,
-            "Shorthand can only be used on impl blocks for named types"
+            "Shorthand can only be used on impl blocks for named types",
         )
         .to_compile_error()
         .into();
@@ -58,7 +56,7 @@ pub fn shorthand(_attr: TokenStream, item: TokenStream) -> TokenStream {
     if !has_new {
         return syn::Error::new_spanned(
             &input,
-            "Shorthand requires a `new` method in the impl block"
+            "Shorthand requires a `new` method in the impl block",
         )
         .to_compile_error()
         .into();
