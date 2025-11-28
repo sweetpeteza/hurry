@@ -51,7 +51,15 @@ git status         # Always show full output
 
 ## Lint and Format
 - `cargo clippy` - Run linter
+- `cargo clippy --fix` - Automatically apply clippy suggestions
 - `cargo fmt` - Format code
+
+### Using Clippy
+- Always run `cargo clippy` to check for code quality issues
+- Use `cargo clippy --fix` to automatically apply safe suggestions
+- Review clippy warnings and apply fixes when appropriate
+- Treat clippy suggestions as code improvement opportunities
+- For complex issues, manually review and implement clippy's recommended changes
 
 ## Code Style Guidelines
 
