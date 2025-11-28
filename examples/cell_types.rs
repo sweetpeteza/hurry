@@ -10,11 +10,11 @@ fn main() {
 
     // RefCell - for non-Copy types, provides interior mutability with runtime borrow checking
     let refcell_vec = refcell!(vec![1, 2, 3]);
-    
+
     // Borrow mutably to modify
     refcell_vec.borrow_mut().push(4);
     refcell_vec.borrow_mut().push(5);
-    
+
     // Borrow immutably to read
     println!("RefCell vec: {:?}", refcell_vec.borrow());
 
