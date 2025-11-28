@@ -41,18 +41,39 @@ git status         # Always show full output
 - Test output shows what passed/failed
 - Users maintain context about system state
 
+## Quick Commands (Just)
+
+This project uses [just](https://github.com/casey/just) as a command runner to simplify common workflows.
+
+**Most Common Commands:**
+- `just check` - Run all pre-commit checks (format, clippy, test)
+- `just dev` - Quick development workflow (format + test)
+- `just ci` - Run full CI workflow locally
+- `just clippy-fix` - Auto-fix clippy warnings
+- `just --list` - Show all available commands
+
+**Individual Commands:**
+- `just fmt` - Format code
+- `just clippy` - Run linter
+- `just test` - Run all tests
+- `just build` - Build the project
+- `just docs` - Build and open documentation
+
+**See `just --list` for the complete list of available commands.**
+
 ## Build Commands
-- `cargo build` - Build the project
-- `cargo build --release` - Build optimized release version
+- `cargo build` or `just build` - Build the project
+- `cargo build --release` or `just build-release` - Build optimized release version
 
 ## Test Commands
-- `cargo test` - Run all tests
+- `cargo test` or `just test` - Run all tests
 - `cargo test <test_name>` - Run a specific test (e.g., `cargo test test_boxx_macro`)
+- `just test-verbose` - Run tests with output
 
 ## Lint and Format
-- `cargo clippy` - Run linter
-- `cargo clippy --fix` - Automatically apply clippy suggestions
-- `cargo fmt` - Format code
+- `cargo clippy` or `just clippy` - Run linter
+- `cargo clippy --fix` or `just clippy-fix` - Automatically apply clippy suggestions
+- `cargo fmt` or `just fmt` - Format code
 
 ### Using Clippy
 - Always run `cargo clippy` to check for code quality issues
