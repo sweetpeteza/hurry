@@ -1,5 +1,46 @@
 # Agent Instructions for hurry
 
+## Terminal Output Guidelines
+
+**IMPORTANT: Always show command output to the user when running terminal commands.**
+
+### Best Practices
+- **Always include output** - Users need to see what commands are doing
+- **Use concise summaries** - For long output, show key parts (beginning/end)
+- **Filter intelligently** - Show errors, warnings, and important status messages
+- **Tail long output** - Use `| tail -n 20` for builds/tests to show final results
+- **Show progress** - Users should see compilation, test results, and status updates
+
+### Command Output Patterns
+
+**For build commands:**
+```bash
+cargo build 2>&1 | tail -n 30  # Show last 30 lines including warnings/errors
+```
+
+**For test commands:**
+```bash
+cargo test 2>&1 | tail -n 50  # Show test results summary
+```
+
+**For long-running commands:**
+```bash
+cargo clippy 2>&1 | tail -n 40  # Show linting results
+```
+
+**When you need full output:**
+```bash
+cargo fmt --check  # Short output, show all
+git status         # Always show full output
+```
+
+### Why This Matters
+- Users can track progress and see what's happening
+- Errors and warnings are immediately visible
+- Builds provide important feedback about compilation
+- Test output shows what passed/failed
+- Users maintain context about system state
+
 ## Build Commands
 - `cargo build` - Build the project
 - `cargo build --release` - Build optimized release version
