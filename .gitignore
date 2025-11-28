@@ -1,1 +1,25 @@
+# Build artifacts
 target/
+**/target/
+
+# Cargo.lock should only be tracked at workspace root for libraries
+**/Cargo.lock
+!Cargo.lock
+
+# Debug and test artifacts
+**/*.rs.bk
+*.pdb
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Cargo cache
+.cargo/
+
+# Documentation build
+doc/
