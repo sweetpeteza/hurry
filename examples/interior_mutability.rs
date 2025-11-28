@@ -5,12 +5,12 @@ use std::thread;
 fn main() {
     // Single-threaded interior mutability with Rc<RefCell<T>>
     let counter = rc_refcell!(0);
-    
+
     // Multiple references can modify the same data
     let counter_clone = counter.clone();
     *counter_clone.borrow_mut() += 1;
     *counter.borrow_mut() += 1;
-    
+
     println!("Counter value: {}", counter.borrow());
 
     // Thread-safe interior mutability with Arc<Mutex<T>>
