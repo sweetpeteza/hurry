@@ -17,3 +17,34 @@ hurry-macros = { version = "0.1.3", path = "./hurry-macros", optional = true }
 
 [features]
 macros = ["hurry-macros"]
+
+# Examples
+[[example]]
+name = "basic_pointers"
+path = "examples/basic_pointers.rs"
+doc-scrape-examples = true
+
+[package.metadata.example.basic_pointers]
+name = "Basic Pointers"
+description = "Demonstrates fundamental pointer wrapper macros (Box, Rc, Arc, Pin)"
+category = "Smart Pointers"
+
+[[example]]
+name = "cell_types"
+path = "examples/cell_types.rs"
+doc-scrape-examples = true
+
+[package.metadata.example.cell_types]
+name = "Cell Types"
+description = "Demonstrates interior mutability with Cell and RefCell, plus Cow types"
+category = "Interior Mutability"
+
+[[example]]
+name = "interior_mutability"
+path = "examples/interior_mutability.rs"
+doc-scrape-examples = true
+
+[package.metadata.example.interior_mutability]
+name = "Interior Mutability Patterns"
+description = "Advanced interior mutability patterns for single-threaded and multi-threaded scenarios"
+category = "Interior Mutability"
