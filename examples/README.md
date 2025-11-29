@@ -4,7 +4,8 @@ This directory contains example programs demonstrating the usage of the `hurry` 
 
 ## Running Examples
 
-To run an example:
+Examples can be run using cargo, similar to how Bevy examples work:
+
 ```bash
 cargo run --example <example_name>
 ```
@@ -16,7 +17,13 @@ cargo run --example basic_pointers
 
 ## Available Examples
 
-### basic_pointers.rs
+| Example | Category | Description |
+|---------|----------|-------------|
+| `basic_pointers` | Smart Pointers | Fundamental pointer wrapper macros (Box, Rc, Arc, Pin) |
+| `cell_types` | Interior Mutability | Cell and RefCell for interior mutability, plus Cow types |
+| `interior_mutability` | Interior Mutability | Advanced patterns for single-threaded and multi-threaded scenarios |
+
+### basic_pointers
 
 Demonstrates the fundamental pointer wrapper macros provided by `hurry`.
 
@@ -27,17 +34,12 @@ Demonstrates the fundamental pointer wrapper macros provided by `hurry`.
 - `pin_box!` - Creating `Pin<Box<T>>` for pinned allocations
 - `vec_box!` - Creating vectors of boxed values
 
-**Use cases:**
-- When to use `Box` vs `Rc` vs `Arc`
-- Checking reference counts
-- Creating collections of heap-allocated values
-
 **Run:**
 ```bash
 cargo run --example basic_pointers
 ```
 
-### cell_types.rs
+### cell_types
 
 Demonstrates interior mutability patterns using `Cell` and `RefCell`.
 
@@ -47,17 +49,12 @@ Demonstrates interior mutability patterns using `Cell` and `RefCell`.
 - `cow_borrowed!` - Creating borrowed `Cow<T>`
 - `cow_owned!` - Creating owned `Cow<T>`
 
-**Use cases:**
-- Interior mutability without `mut` keyword
-- Runtime borrow checking with `RefCell`
-- Copy-on-write semantics with `Cow`
-
 **Run:**
 ```bash
 cargo run --example cell_types
 ```
 
-### interior_mutability.rs
+### interior_mutability
 
 Demonstrates advanced interior mutability patterns for both single-threaded and multi-threaded scenarios.
 
@@ -65,12 +62,6 @@ Demonstrates advanced interior mutability patterns for both single-threaded and 
 - `rc_refcell!` - Creating `Rc<RefCell<T>>` for shared mutable state (single-threaded)
 - `arc_mutex!` - Creating `Arc<Mutex<T>>` for shared mutable state (thread-safe)
 - `arc_rwlock!` - Creating `Arc<RwLock<T>>` for concurrent read-write access
-
-**Use cases:**
-- Shared mutable state within a single thread
-- Thread-safe shared mutable state
-- Concurrent readers with exclusive writer pattern
-- Multi-threaded counter implementations
 
 **Run:**
 ```bash
@@ -89,21 +80,33 @@ Each example follows a similar pattern:
 
 We recommend exploring the examples in this order:
 
-1. **basic_pointers.rs** - Start here to understand the fundamental pointer types
-2. **cell_types.rs** - Learn about interior mutability for single-threaded code
-3. **interior_mutability.rs** - Explore thread-safe patterns and advanced usage
+1. **basic_pointers** - Start here to understand the fundamental pointer types
+2. **cell_types** - Learn about interior mutability for single-threaded code
+3. **interior_mutability** - Explore thread-safe patterns and advanced usage
 
 ## Adding New Examples
 
 When adding new examples:
 1. Create a new `.rs` file in this directory
-2. Add a descriptive header comment explaining what the example demonstrates
-3. Import only the macros you need
-4. Include `println!` statements to show the output
-5. Update this README with a description of the new example
-6. Test that the example compiles and runs:
+2. Add example metadata to `Cargo.toml`:
+   ```toml
+   [[example]]
+   name = "example_name"
+   path = "examples/example_name.rs"
+   doc-scrape-examples = true
+   
+   [package.metadata.example.example_name]
+   name = "Display Name"
+   description = "Brief description"
+   category = "Category"
+   ```
+3. Add a descriptive header comment explaining what the example demonstrates
+4. Import only the macros you need
+5. Include `println!` statements to show the output
+6. Update this README with a description of the new example
+7. Test that the example compiles and runs:
    ```bash
-   cargo run --example your_example_name
+   cargo run --example example_name
    ```
 
 ## Common Patterns
