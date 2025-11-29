@@ -262,7 +262,7 @@ mod tests {
     #[test]
     fn test_rc_macro() {
         let x = rc!(42);
-        let y = x.clone();
+        let y = std::rc::Rc::clone(&x);
         assert_eq!(*x, 42);
         assert_eq!(*y, 42);
     }
@@ -270,7 +270,7 @@ mod tests {
     #[test]
     fn test_arc_macro() {
         let x = arc!(42);
-        let y = x.clone();
+        let y = std::sync::Arc::clone(&x);
         assert_eq!(*x, 42);
         assert_eq!(*y, 42);
     }
