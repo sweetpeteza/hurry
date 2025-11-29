@@ -5,7 +5,7 @@ use syn::{parse_macro_input, ItemImpl};
 
 /// Generates a shorthand macro for types with a `new` method.
 ///
-/// The macro name will be the snake_case version of the type name.
+/// The macro name will be the `snake_case` version of the type name.
 ///
 /// # Example
 /// ```

@@ -1,5 +1,5 @@
 // Example demonstrating interior mutability patterns
-use hurry::*;
+use hurry::{arc_mutex, arc_rwlock, rc_refcell};
 use std::thread;
 
 fn main() {
@@ -7,7 +7,7 @@ fn main() {
     let counter = rc_refcell!(0);
 
     // Multiple references can modify the same data
-    let counter_clone = counter.clone();
+    let counter_clone = std::rc::Rc::clone(&counter);
     *counter_clone.borrow_mut() += 1;
     *counter.borrow_mut() += 1;
 
@@ -18,7 +18,7 @@ fn main() {
     let mut handles = vec![];
 
     for _ in 0..10 {
-        let counter = shared_counter.clone();
+        let counter = std::sync::Arc::clone(&shared_counter);
         let handle = thread::spawn(move || {
             let mut num = counter.lock().unwrap();
             *num += 1;
@@ -34,7 +34,7 @@ fn main() {
 
     // Read-write lock for concurrent reads
     let data = arc_rwlock!(vec![1, 2, 3, 4, 5]);
-    let data_clone = data.clone();
+    let data_clone = std::sync::Arc::clone(&data);
 
     // Multiple readers can access simultaneously
     let reader = thread::spawn(move || {
